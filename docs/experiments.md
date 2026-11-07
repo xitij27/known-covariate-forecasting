@@ -1,6 +1,7 @@
 # Experiment log
 
-Thirteen experiments, May to August 2026. Every score is WAPE, lower is better.
+Thirteen experiments, May to August 2026. Every score is WAPE, lower is better. The notebooks
+and notes behind each one are in [`experiments/`](../experiments/).
 
 - **CV**: 3-fold rolling-origin cross-validation on the last 3 × 336 hours of `train.csv`.
 - **LB**: the course's public validation leaderboard, scored against hidden labels.
