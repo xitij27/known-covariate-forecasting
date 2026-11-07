@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "loadforecast"
+version = "1.0.0"
+description = "Forecasting 96 hourly load series 14 days ahead from known future covariates: LightGBM and a Temporal Fusion Transformer ensemble."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Kshitij Parashar" }]
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "lightgbm>=4.3",
+    "scikit-learn>=1.4",
+    "matplotlib>=3.8",
+]
+
+[project.optional-dependencies]
+# Pinned: the TFT code relies on pytorch-forecasting 1.8.0 semantics (loss on the original
+# target scale, TimeSeriesDataSet.filter index columns, randomize_length, mask_bias).
+tft = [
+    "torch==2.10.0",
+    "lightning==2.6.5",
+    "pytorch-forecasting==1.8.0",
+]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+loadforecast = "loadforecast.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["tft: needs the [tft] extra (torch, lightning, pytorch-forecasting)"]
+filterwarnings = [
+    "ignore:.*does not have many workers.*",
+    "ignore:.*ReduceLROnPlateau conditioned on metric val_loss.*",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["loadforecast", "conftest"]

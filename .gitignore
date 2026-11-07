@@ -1,0 +1,19 @@
+# Dataset (downloaded by `loadforecast download`; its licence does not allow redistribution)
+data/
+
+# Checkpoints (published as a GitHub release asset) and run outputs
+models/
+outputs/
+*.ckpt
+lightning_logs/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+.DS_Store
